@@ -1,7 +1,7 @@
 # REST Api testing using Robot Framework
 
 
-This project is part of a **Quality Engineer Code Assignment**, where the main task is to **write and execute tests** for a simple REST server implementation.  
+This project is centered on **REST API TESTING** where the main task is to **write and execute tests** for a simple REST server implementation.  
 
 # The setup includes:
 - A provided REST server (`server/server.py`).

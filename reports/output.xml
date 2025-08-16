@@ -1,369 +1,369 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.3.2 (Python 3.10.18 on linux)" generated="2025-08-16T14:05:52.281583" rpa="false" schemaversion="5">
+<robot generator="Robot 7.3.2 (Python 3.10.18 on linux)" generated="2025-08-16T18:21:21.121216" rpa="false" schemaversion="5">
 <suite id="s1" name="Tests" source="/tests">
-<suite id="s1-s1" name="Rest Api Test Delete" source="/tests/rest_api_test_delete.robot">
+<suite id="s1-s1" name="TC1 POST" source="/tests/TC1_POST.robot">
 <kw name="Create Session" owner="RequestsLibrary" type="SETUP">
-<msg time="2025-08-16T14:05:52.396387" level="INFO">Creating Session using : alias=rest, url=http://rest-server-container:5000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg time="2025-08-16T18:21:21.246427" level="INFO">Creating Session using : alias=rest, url=http://rest-server-container:5000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
 <arg>rest</arg>
 <arg>http://rest-server-container:5000</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2025-08-16T14:05:52.396239" elapsed="0.000362"/>
+<status status="PASS" start="2025-08-16T18:21:21.246299" elapsed="0.000305"/>
 </kw>
-<test id="s1-s1-t1" name="Delete First Available Item" line="9">
-<kw name="GET On Session" owner="RequestsLibrary">
-<msg time="2025-08-16T14:05:52.403752" level="INFO">GET Request : url=http://rest-server-container:5000/items (redirected) 
- path_url=/items 
- headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
- body=None 
- </msg>
-<msg time="2025-08-16T14:05:52.403847" level="INFO">GET Response : url=http://rest-server-container:5000/items/ 
- status=200, reason=OK 
- headers={'Server': 'Werkzeug/3.1.3 Python/3.10.18', 'Date': 'Sat, 16 Aug 2025 14:05:52 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '100', 'Connection': 'close'} 
- body=[{"name": "item_0"}, {"name": "item_1"}, {"name": "item_2"}, {"name": "item_3"}, {"name": "item_4"}] 
- </msg>
-<msg time="2025-08-16T14:05:52.403968" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
-<var>${resp}</var>
-<arg>rest</arg>
-<arg>/items</arg>
-<doc>Sends a GET request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.397036" elapsed="0.006953"/>
-</kw>
-<kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-08-16T14:05:52.404526" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;class 'str'&gt;</msg>
-<arg>${resp.status_code}</arg>
-<arg>200</arg>
-<doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.404123" elapsed="0.000461"/>
-</kw>
-<kw name="Call Method" owner="BuiltIn">
-<msg time="2025-08-16T14:05:52.404807" level="INFO">${items} = [{'name': 'item_0'}, {'name': 'item_1'}, {'name': 'item_2'}, {'name': 'item_3'}, {'name': 'item_4'}]</msg>
-<var>${items}</var>
-<arg>${resp}</arg>
-<arg>json</arg>
-<doc>Calls the named method of the given object with the provided arguments.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.404670" elapsed="0.000156"/>
-</kw>
-<kw name="Get From List" owner="Collections">
-<msg time="2025-08-16T14:05:52.405021" level="INFO">${first_item} = {'name': 'item_0'}</msg>
-<var>${first_item}</var>
-<arg>${items}</arg>
-<arg>0</arg>
-<doc>Returns the value specified with an ``index`` from ``list``.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.404900" elapsed="0.000139"/>
-</kw>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-08-16T14:05:52.405225" level="INFO">${item_name} = item_0</msg>
-<var>${item_name}</var>
-<arg>${first_item}</arg>
-<arg>name</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.405111" elapsed="0.000130"/>
-</kw>
-<kw name="Log To Console" owner="BuiltIn">
-<arg>The value of item_name is: ${item_name}</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.405342" elapsed="0.000154"/>
-</kw>
-<kw name="DELETE On Session" owner="RequestsLibrary">
-<msg time="2025-08-16T14:05:52.407252" level="INFO">DELETE Request : url=http://rest-server-container:5000/items/item_0 
- path_url=/items/item_0 
- headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
- body=None 
- </msg>
-<msg time="2025-08-16T14:05:52.407295" level="INFO">DELETE Response : url=http://rest-server-container:5000/items/item_0 
- status=204, reason=NO CONTENT 
- headers={'Server': 'Werkzeug/3.1.3 Python/3.10.18', 'Date': 'Sat, 16 Aug 2025 14:05:52 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Connection': 'close'} 
- body=None 
- </msg>
-<msg time="2025-08-16T14:05:52.407373" level="INFO">${del_resp} = &lt;Response [204]&gt;</msg>
-<var>${del_resp}</var>
-<arg>rest</arg>
-<arg>/items/${item_name}</arg>
-<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.405583" elapsed="0.001807"/>
-</kw>
-<kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-08-16T14:05:52.407813" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;class 'str'&gt;</msg>
-<arg>${del_resp.status_code}</arg>
-<arg>204</arg>
-<doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.407474" elapsed="0.000380"/>
-</kw>
-<kw name="Log To Console" owner="BuiltIn">
-<arg>Item deleted: ${item_name}</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.407929" elapsed="0.000117"/>
-</kw>
-<tag>DELETE</tag>
-<status status="PASS" start="2025-08-16T14:05:52.396718" elapsed="0.011426"/>
-</test>
-<status status="PASS" start="2025-08-16T14:05:52.297579" elapsed="0.110965"/>
-</suite>
-<suite id="s1-s2" name="Rest Api Test Get" source="/tests/rest_api_test_get.robot">
-<kw name="Create Session" owner="RequestsLibrary" type="SETUP">
-<msg time="2025-08-16T14:05:52.410966" level="INFO">Creating Session using : alias=rest, url=http://rest-server-container:5000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<arg>rest</arg>
-<arg>http://rest-server-container:5000</arg>
-<doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2025-08-16T14:05:52.410887" elapsed="0.000191"/>
-</kw>
-<test id="s1-s2-t1" name="Get Item By Name" line="9">
-<kw name="GET On Session" owner="RequestsLibrary">
-<msg time="2025-08-16T14:05:52.414511" level="INFO">GET Request : url=http://rest-server-container:5000/items (redirected) 
- path_url=/items 
- headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
- body=None 
- </msg>
-<msg time="2025-08-16T14:05:52.414589" level="INFO">GET Response : url=http://rest-server-container:5000/items/ 
- status=200, reason=OK 
- headers={'Server': 'Werkzeug/3.1.3 Python/3.10.18', 'Date': 'Sat, 16 Aug 2025 14:05:52 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '80', 'Connection': 'close'} 
- body=[{"name": "item_1"}, {"name": "item_2"}, {"name": "item_3"}, {"name": "item_4"}] 
- </msg>
-<msg time="2025-08-16T14:05:52.414700" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
-<var>${resp}</var>
-<arg>rest</arg>
-<arg>/items</arg>
-<doc>Sends a GET request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.411351" elapsed="0.003370"/>
-</kw>
-<kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-08-16T14:05:52.415154" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;class 'str'&gt;</msg>
-<arg>${resp.status_code}</arg>
-<arg>200</arg>
-<doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.414826" elapsed="0.000372"/>
-</kw>
-<kw name="Call Method" owner="BuiltIn">
-<msg time="2025-08-16T14:05:52.415411" level="INFO">${items} = [{'name': 'item_1'}, {'name': 'item_2'}, {'name': 'item_3'}, {'name': 'item_4'}]</msg>
-<var>${items}</var>
-<arg>${resp}</arg>
-<arg>json</arg>
-<doc>Calls the named method of the given object with the provided arguments.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.415280" elapsed="0.000149"/>
-</kw>
-<kw name="Get From List" owner="Collections">
-<msg time="2025-08-16T14:05:52.415630" level="INFO">${first_item} = {'name': 'item_1'}</msg>
-<var>${first_item}</var>
-<arg>${items}</arg>
-<arg>0</arg>
-<doc>Returns the value specified with an ``index`` from ``list``.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.415502" elapsed="0.000494"/>
-</kw>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-08-16T14:05:52.416268" level="INFO">${item_name} = item_1</msg>
-<var>${item_name}</var>
-<arg>${first_item}</arg>
-<arg>name</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.416111" elapsed="0.000177"/>
-</kw>
-<kw name="Log To Console" owner="BuiltIn">
-<arg>First item extracted: ${item_name}</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.416364" elapsed="0.000145"/>
-</kw>
-<kw name="GET On Session" owner="RequestsLibrary">
-<msg time="2025-08-16T14:05:52.418286" level="INFO">GET Request : url=http://rest-server-container:5000/items/item_1 
- path_url=/items/item_1 
- headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
- body=None 
- </msg>
-<msg time="2025-08-16T14:05:52.418351" level="INFO">GET Response : url=http://rest-server-container:5000/items/item_1 
- status=200, reason=OK 
- headers={'Server': 'Werkzeug/3.1.3 Python/3.10.18', 'Date': 'Sat, 16 Aug 2025 14:05:52 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '18', 'Connection': 'close'} 
- body={"name": "item_1"} 
- </msg>
-<msg time="2025-08-16T14:05:52.418441" level="INFO">${resp_item} = &lt;Response [200]&gt;</msg>
-<var>${resp_item}</var>
-<arg>rest</arg>
-<arg>/items/${item_name}</arg>
-<doc>Sends a GET request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.416635" elapsed="0.001827"/>
-</kw>
-<kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-08-16T14:05:52.418928" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;class 'str'&gt;</msg>
-<arg>${resp_item.status_code}</arg>
-<arg>200</arg>
-<doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.418586" elapsed="0.000386"/>
-</kw>
-<kw name="Call Method" owner="BuiltIn">
-<msg time="2025-08-16T14:05:52.419192" level="INFO">${resp_item_json} = {'name': 'item_1'}</msg>
-<var>${resp_item_json}</var>
-<arg>${resp_item}</arg>
-<arg>json</arg>
-<doc>Calls the named method of the given object with the provided arguments.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.419056" elapsed="0.000155"/>
-</kw>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-08-16T14:05:52.419412" level="INFO">${resp_item_name} = item_1</msg>
-<var>${resp_item_name}</var>
-<arg>${resp_item_json}</arg>
-<arg>name</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.419286" elapsed="0.000144"/>
-</kw>
-<kw name="Log To Console" owner="BuiltIn">
-<arg>Item fetched from API: ${resp_item_name}</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.419520" elapsed="0.000153"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<arg>${resp_item_name}</arg>
-<arg>${item_name}</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.419763" elapsed="0.000197"/>
-</kw>
-<tag>GET</tag>
-<status status="PASS" start="2025-08-16T14:05:52.411130" elapsed="0.008919"/>
-</test>
-<status status="PASS" start="2025-08-16T14:05:52.408863" elapsed="0.011472"/>
-</suite>
-<suite id="s1-s3" name="Rest Api Test Getall" source="/tests/rest_api_test_getall.robot">
-<kw name="Create Session" owner="RequestsLibrary" type="SETUP">
-<msg time="2025-08-16T14:05:52.431144" level="INFO">Creating Session using : alias=rest, url=http://rest-server-container:5000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<arg>rest</arg>
-<arg>http://rest-server-container:5000</arg>
-<doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2025-08-16T14:05:52.431043" elapsed="0.000284"/>
-</kw>
-<test id="s1-s3-t1" name="List All Items" line="14">
-<kw name="GET On Session" owner="RequestsLibrary">
-<msg time="2025-08-16T14:05:52.433722" level="INFO">GET Request : url=http://rest-server-container:5000/items/ 
- path_url=/items/ 
- headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
- body=None 
- </msg>
-<msg time="2025-08-16T14:05:52.433773" level="INFO">GET Response : url=http://rest-server-container:5000/items/ 
- status=200, reason=OK 
- headers={'Server': 'Werkzeug/3.1.3 Python/3.10.18', 'Date': 'Sat, 16 Aug 2025 14:05:52 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '80', 'Connection': 'close'} 
- body=[{"name": "item_1"}, {"name": "item_2"}, {"name": "item_3"}, {"name": "item_4"}] 
- </msg>
-<msg time="2025-08-16T14:05:52.433860" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
-<var>${resp}</var>
-<arg>rest</arg>
-<arg>/items/</arg>
-<doc>Sends a GET request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.431652" elapsed="0.002227"/>
-</kw>
-<kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-08-16T14:05:52.434280" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;class 'str'&gt;</msg>
-<arg>${resp.status_code}</arg>
-<arg>200</arg>
-<doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.433967" elapsed="0.000354"/>
-</kw>
-<kw name="Should Not Be Empty" owner="BuiltIn">
-<msg time="2025-08-16T14:05:52.434687" level="INFO">Length is 6.</msg>
-<arg>${resp.json()[0]['name']}</arg>
-<doc>Verifies that the given item is not empty.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.434395" elapsed="0.000324"/>
-</kw>
-<kw name="Log To Console" owner="BuiltIn">
-<arg>${resp.json()}</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.434790" elapsed="0.000300"/>
-</kw>
-<tag>GET</tag>
-<status status="PASS" start="2025-08-16T14:05:52.431392" elapsed="0.003782"/>
-</test>
-<status status="PASS" start="2025-08-16T14:05:52.420671" elapsed="0.014758"/>
-</suite>
-<suite id="s1-s4" name="Rest Api Test Post" source="/tests/rest_api_test_post.robot">
-<kw name="Create Session" owner="RequestsLibrary" type="SETUP">
-<msg time="2025-08-16T14:05:52.438120" level="INFO">Creating Session using : alias=rest, url=http://rest-server-container:5000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<arg>rest</arg>
-<arg>http://rest-server-container:5000</arg>
-<doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2025-08-16T14:05:52.437996" elapsed="0.000234"/>
-</kw>
-<test id="s1-s4-t1" name="Add New Item With Dynamic Name" line="15">
+<test id="s1-s1-t1" name="Add New Item With Dynamic Name" line="15">
 <kw name="Get Current Date" owner="DateTime">
-<msg time="2025-08-16T14:05:52.438754" level="INFO">${timestamp} = 52</msg>
+<msg time="2025-08-16T18:21:21.247154" level="INFO">${timestamp} = 21</msg>
 <var>${timestamp}</var>
 <arg>result_format=%S</arg>
 <doc>Returns current local or UTC time with an optional increment.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.438526" elapsed="0.000249"/>
+<status status="PASS" start="2025-08-16T18:21:21.246980" elapsed="0.000195"/>
 </kw>
 <kw name="Catenate" owner="BuiltIn">
-<msg time="2025-08-16T14:05:52.438999" level="INFO">${dynamic_item_name} = item_52</msg>
+<msg time="2025-08-16T18:21:21.247415" level="INFO">${dynamic_item_name} = item_21</msg>
 <var>${dynamic_item_name}</var>
 <arg>SEPARATOR=_</arg>
 <arg>${ITEM_NAME_BASE}</arg>
 <arg>${timestamp}</arg>
 <doc>Catenates the given items together and returns the resulted string.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.438854" elapsed="0.000162"/>
+<status status="PASS" start="2025-08-16T18:21:21.247258" elapsed="0.000189"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-08-16T14:05:52.439354" level="INFO">${data} = {'name': 'item_52', 'email': 'test@ssh.com'}</msg>
+<msg time="2025-08-16T18:21:21.247777" level="INFO">${data} = {'name': 'item_21', 'email': 'test@ssh.com'}</msg>
 <var>${data}</var>
 <arg>name=${dynamic_item_name}</arg>
 <arg>email=${ITEM_EMAIL}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.439109" elapsed="0.000265"/>
+<status status="PASS" start="2025-08-16T18:21:21.247537" elapsed="0.000258"/>
 </kw>
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2025-08-16T14:05:52.441434" level="INFO">POST Request : url=http://rest-server-container:5000/items/ 
+<msg time="2025-08-16T18:21:21.251406" level="INFO">POST Request : url=http://rest-server-container:5000/items/ 
  path_url=/items/ 
  headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '44', 'Content-Type': 'application/json'} 
- body=b'{"name": "item_52", "email": "test@ssh.com"}' 
+ body=b'{"name": "item_21", "email": "test@ssh.com"}' 
  </msg>
-<msg time="2025-08-16T14:05:52.441479" level="INFO">POST Response : url=http://rest-server-container:5000/items/ 
+<msg time="2025-08-16T18:21:21.251575" level="INFO">POST Response : url=http://rest-server-container:5000/items/ 
  status=201, reason=CREATED 
- headers={'Server': 'Werkzeug/3.1.3 Python/3.10.18', 'Date': 'Sat, 16 Aug 2025 14:05:52 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '44', 'Connection': 'close'} 
- body={"name": "item_52", "email": "test@ssh.com"} 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.10.18', 'Date': 'Sat, 16 Aug 2025 18:21:21 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '44', 'Connection': 'close'} 
+ body={"name": "item_21", "email": "test@ssh.com"} 
  </msg>
-<msg time="2025-08-16T14:05:52.441575" level="INFO">${resp} = &lt;Response [201]&gt;</msg>
+<msg time="2025-08-16T18:21:21.251698" level="INFO">${resp} = &lt;Response [201]&gt;</msg>
 <var>${resp}</var>
 <arg>rest</arg>
 <arg>/items/</arg>
 <arg>json=${data}</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.439661" elapsed="0.001934"/>
+<status status="PASS" start="2025-08-16T18:21:21.247873" elapsed="0.003854"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-08-16T14:05:52.442007" level="INFO">Argument types are:
+<msg time="2025-08-16T18:21:21.252185" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${resp.status_code}</arg>
 <arg>201</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.441688" elapsed="0.000361"/>
+<status status="PASS" start="2025-08-16T18:21:21.251832" elapsed="0.000396"/>
 </kw>
 <kw name="Should Be Equal" owner="BuiltIn">
 <arg>${resp.json()['name']}</arg>
 <arg>${dynamic_item_name}</arg>
 <doc>Fails if the given objects are unequal.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.442138" elapsed="0.000350"/>
+<status status="PASS" start="2025-08-16T18:21:21.252308" elapsed="0.000357"/>
 </kw>
 <kw name="Set Suite Variable" owner="BuiltIn">
-<msg time="2025-08-16T14:05:52.443218" level="INFO">${ITEM_NAME} = item_52</msg>
+<msg time="2025-08-16T18:21:21.253348" level="INFO">${ITEM_NAME} = item_21</msg>
 <arg>${ITEM_NAME}</arg>
 <arg>${dynamic_item_name}</arg>
 <doc>Makes a variable available everywhere within the scope of the current suite.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.442600" elapsed="0.000654"/>
+<status status="PASS" start="2025-08-16T18:21:21.252749" elapsed="0.000632"/>
 </kw>
 <kw name="Log To Console" owner="BuiltIn">
 <arg>Item added: ${dynamic_item_name}</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2025-08-16T14:05:52.443334" elapsed="0.000119"/>
+<status status="PASS" start="2025-08-16T18:21:21.253470" elapsed="0.000777"/>
 </kw>
 <tag>POST</tag>
-<status status="PASS" start="2025-08-16T14:05:52.438284" elapsed="0.005245"/>
+<status status="PASS" start="2025-08-16T18:21:21.246697" elapsed="0.007645"/>
 </test>
-<status status="PASS" start="2025-08-16T14:05:52.435739" elapsed="0.008026"/>
+<status status="PASS" start="2025-08-16T18:21:21.138785" elapsed="0.115834"/>
 </suite>
-<status status="PASS" start="2025-08-16T14:05:52.283214" elapsed="0.160970"/>
+<suite id="s1-s2" name="TC2 GET ALL" source="/tests/TC2_GET_ALL.robot">
+<kw name="Create Session" owner="RequestsLibrary" type="SETUP">
+<msg time="2025-08-16T18:21:21.256308" level="INFO">Creating Session using : alias=rest, url=http://rest-server-container:5000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>rest</arg>
+<arg>http://rest-server-container:5000</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-08-16T18:21:21.256228" elapsed="0.000188"/>
+</kw>
+<test id="s1-s2-t1" name="List All Items" line="14">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-08-16T18:21:21.258370" level="INFO">GET Request : url=http://rest-server-container:5000/items/ 
+ path_url=/items/ 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-08-16T18:21:21.258429" level="INFO">GET Response : url=http://rest-server-container:5000/items/ 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.10.18', 'Date': 'Sat, 16 Aug 2025 18:21:21 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '146', 'Connection': 'close'} 
+ body=[{"name": "item_0"}, {"name": "item_1"}, {"name": "item_2"}, {"name": "item_3"}, {"name": "item_4"}, {"name": "item_21", "email": "test@ssh.com"}] 
+ </msg>
+<msg time="2025-08-16T18:21:21.258537" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>rest</arg>
+<arg>/items/</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-08-16T18:21:21.256695" elapsed="0.001862"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-08-16T18:21:21.258984" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-08-16T18:21:21.258659" elapsed="0.000368"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2025-08-16T18:21:21.259387" level="INFO">Length is 6.</msg>
+<arg>${resp.json()[0]['name']}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2025-08-16T18:21:21.259108" elapsed="0.000311"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${resp.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-08-16T18:21:21.259504" elapsed="0.000309"/>
+</kw>
+<tag>GET</tag>
+<status status="PASS" start="2025-08-16T18:21:21.256476" elapsed="0.003415"/>
+</test>
+<status status="PASS" start="2025-08-16T18:21:21.254915" elapsed="0.005147"/>
+</suite>
+<suite id="s1-s3" name="TC3 GET ONE" source="/tests/TC3_GET_ONE.robot">
+<kw name="Create Session" owner="RequestsLibrary" type="SETUP">
+<msg time="2025-08-16T18:21:21.269355" level="INFO">Creating Session using : alias=rest, url=http://rest-server-container:5000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>rest</arg>
+<arg>http://rest-server-container:5000</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-08-16T18:21:21.269264" elapsed="0.000221"/>
+</kw>
+<test id="s1-s3-t1" name="Get Item By Name" line="9">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-08-16T18:21:21.273637" level="INFO">GET Request : url=http://rest-server-container:5000/items (redirected) 
+ path_url=/items 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-08-16T18:21:21.274339" level="INFO">GET Response : url=http://rest-server-container:5000/items/ 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.10.18', 'Date': 'Sat, 16 Aug 2025 18:21:21 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '146', 'Connection': 'close'} 
+ body=[{"name": "item_0"}, {"name": "item_1"}, {"name": "item_2"}, {"name": "item_3"}, {"name": "item_4"}, {"name": "item_21", "email": "test@ssh.com"}] 
+ </msg>
+<msg time="2025-08-16T18:21:21.274507" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>rest</arg>
+<arg>/items</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-08-16T18:21:21.269770" elapsed="0.004764"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-08-16T18:21:21.275088" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-08-16T18:21:21.274665" elapsed="0.000474"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-08-16T18:21:21.275393" level="INFO">${items} = [{'name': 'item_0'}, {'name': 'item_1'}, {'name': 'item_2'}, {'name': 'item_3'}, {'name': 'item_4'}, {'name': 'item_21', 'email': 'test@ssh.com'}]</msg>
+<var>${items}</var>
+<arg>${resp}</arg>
+<arg>json</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-08-16T18:21:21.275237" elapsed="0.000176"/>
+</kw>
+<kw name="Get From List" owner="Collections">
+<msg time="2025-08-16T18:21:21.275633" level="INFO">${first_item} = {'name': 'item_0'}</msg>
+<var>${first_item}</var>
+<arg>${items}</arg>
+<arg>0</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<status status="PASS" start="2025-08-16T18:21:21.275506" elapsed="0.000146"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-08-16T18:21:21.276038" level="INFO">${item_name} = item_0</msg>
+<var>${item_name}</var>
+<arg>${first_item}</arg>
+<arg>name</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-08-16T18:21:21.275728" elapsed="0.000329"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>First item extracted: ${item_name}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-08-16T18:21:21.276153" elapsed="0.000156"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-08-16T18:21:21.278925" level="INFO">GET Request : url=http://rest-server-container:5000/items/item_0 
+ path_url=/items/item_0 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-08-16T18:21:21.278978" level="INFO">GET Response : url=http://rest-server-container:5000/items/item_0 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.10.18', 'Date': 'Sat, 16 Aug 2025 18:21:21 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '18', 'Connection': 'close'} 
+ body={"name": "item_0"} 
+ </msg>
+<msg time="2025-08-16T18:21:21.279065" level="INFO">${resp_item} = &lt;Response [200]&gt;</msg>
+<var>${resp_item}</var>
+<arg>rest</arg>
+<arg>/items/${item_name}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-08-16T18:21:21.276427" elapsed="0.002658"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-08-16T18:21:21.279549" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp_item.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-08-16T18:21:21.279190" elapsed="0.000402"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-08-16T18:21:21.279915" level="INFO">${resp_item_json} = {'name': 'item_0'}</msg>
+<var>${resp_item_json}</var>
+<arg>${resp_item}</arg>
+<arg>json</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-08-16T18:21:21.279674" elapsed="0.000259"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-08-16T18:21:21.280135" level="INFO">${resp_item_name} = item_0</msg>
+<var>${resp_item_name}</var>
+<arg>${resp_item_json}</arg>
+<arg>name</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-08-16T18:21:21.280010" elapsed="0.000141"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Item fetched from API: ${resp_item_name}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-08-16T18:21:21.280222" elapsed="0.000119"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${resp_item_name}</arg>
+<arg>${item_name}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-08-16T18:21:21.280416" elapsed="0.000149"/>
+</kw>
+<tag>GET</tag>
+<status status="PASS" start="2025-08-16T18:21:21.269542" elapsed="0.011114"/>
+</test>
+<status status="PASS" start="2025-08-16T18:21:21.260346" elapsed="0.020519"/>
+</suite>
+<suite id="s1-s4" name="TC4 DELETE" source="/tests/TC4_DELETE.robot">
+<kw name="Create Session" owner="RequestsLibrary" type="SETUP">
+<msg time="2025-08-16T18:21:21.282733" level="INFO">Creating Session using : alias=rest, url=http://rest-server-container:5000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>rest</arg>
+<arg>http://rest-server-container:5000</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-08-16T18:21:21.282630" elapsed="0.000528"/>
+</kw>
+<test id="s1-s4-t1" name="Delete First Available Item" line="9">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-08-16T18:21:21.287570" level="INFO">GET Request : url=http://rest-server-container:5000/items (redirected) 
+ path_url=/items 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-08-16T18:21:21.287641" level="INFO">GET Response : url=http://rest-server-container:5000/items/ 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.10.18', 'Date': 'Sat, 16 Aug 2025 18:21:21 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '146', 'Connection': 'close'} 
+ body=[{"name": "item_0"}, {"name": "item_1"}, {"name": "item_2"}, {"name": "item_3"}, {"name": "item_4"}, {"name": "item_21", "email": "test@ssh.com"}] 
+ </msg>
+<msg time="2025-08-16T18:21:21.287762" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>rest</arg>
+<arg>/items</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-08-16T18:21:21.283482" elapsed="0.004301"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-08-16T18:21:21.288317" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-08-16T18:21:21.287915" elapsed="0.000451"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-08-16T18:21:21.288624" level="INFO">${items} = [{'name': 'item_0'}, {'name': 'item_1'}, {'name': 'item_2'}, {'name': 'item_3'}, {'name': 'item_4'}, {'name': 'item_21', 'email': 'test@ssh.com'}]</msg>
+<var>${items}</var>
+<arg>${resp}</arg>
+<arg>json</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-08-16T18:21:21.288475" elapsed="0.000169"/>
+</kw>
+<kw name="Get From List" owner="Collections">
+<msg time="2025-08-16T18:21:21.289082" level="INFO">${first_item} = {'name': 'item_0'}</msg>
+<var>${first_item}</var>
+<arg>${items}</arg>
+<arg>0</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<status status="PASS" start="2025-08-16T18:21:21.288943" elapsed="0.000157"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-08-16T18:21:21.289503" level="INFO">${item_name} = item_0</msg>
+<var>${item_name}</var>
+<arg>${first_item}</arg>
+<arg>name</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-08-16T18:21:21.289237" elapsed="0.000317"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>The value of item_name is: ${item_name}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-08-16T18:21:21.289695" elapsed="0.000141"/>
+</kw>
+<kw name="DELETE On Session" owner="RequestsLibrary">
+<msg time="2025-08-16T18:21:21.292317" level="INFO">DELETE Request : url=http://rest-server-container:5000/items/item_0 
+ path_url=/items/item_0 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-08-16T18:21:21.292370" level="INFO">DELETE Response : url=http://rest-server-container:5000/items/item_0 
+ status=204, reason=NO CONTENT 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.10.18', 'Date': 'Sat, 16 Aug 2025 18:21:21 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Connection': 'close'} 
+ body=None 
+ </msg>
+<msg time="2025-08-16T18:21:21.292470" level="INFO">${del_resp} = &lt;Response [204]&gt;</msg>
+<var>${del_resp}</var>
+<arg>rest</arg>
+<arg>/items/${item_name}</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-08-16T18:21:21.289941" elapsed="0.002549"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-08-16T18:21:21.292969" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${del_resp.status_code}</arg>
+<arg>204</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-08-16T18:21:21.292622" elapsed="0.000391"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Item deleted: ${item_name}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-08-16T18:21:21.293093" elapsed="0.000121"/>
+</kw>
+<tag>DELETE</tag>
+<status status="PASS" start="2025-08-16T18:21:21.283223" elapsed="0.010088"/>
+</test>
+<status status="PASS" start="2025-08-16T18:21:21.281167" elapsed="0.012360"/>
+</suite>
+<status status="PASS" start="2025-08-16T18:21:21.123138" elapsed="0.171127"/>
 </suite>
 <statistics>
 <total>
@@ -376,10 +376,10 @@
 </tag>
 <suite>
 <stat name="Tests" id="s1" pass="4" fail="0" skip="0">Tests</stat>
-<stat name="Rest Api Test Delete" id="s1-s1" pass="1" fail="0" skip="0">Tests.Rest Api Test Delete</stat>
-<stat name="Rest Api Test Get" id="s1-s2" pass="1" fail="0" skip="0">Tests.Rest Api Test Get</stat>
-<stat name="Rest Api Test Getall" id="s1-s3" pass="1" fail="0" skip="0">Tests.Rest Api Test Getall</stat>
-<stat name="Rest Api Test Post" id="s1-s4" pass="1" fail="0" skip="0">Tests.Rest Api Test Post</stat>
+<stat name="TC1 POST" id="s1-s1" pass="1" fail="0" skip="0">Tests.TC1 POST</stat>
+<stat name="TC2 GET ALL" id="s1-s2" pass="1" fail="0" skip="0">Tests.TC2 GET ALL</stat>
+<stat name="TC3 GET ONE" id="s1-s3" pass="1" fail="0" skip="0">Tests.TC3 GET ONE</stat>
+<stat name="TC4 DELETE" id="s1-s4" pass="1" fail="0" skip="0">Tests.TC4 DELETE</stat>
 </suite>
 </statistics>
 <errors>
