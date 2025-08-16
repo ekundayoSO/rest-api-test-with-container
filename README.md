@@ -1,4 +1,4 @@
-# REST Api testing using Robot Framework
+# REST API testing using Robot Framework
 
 
 This project is centered on **REST API TESTING** where the main task is to **write and execute tests** for a simple REST server implementation.  
