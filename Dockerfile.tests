@@ -1,0 +1,10 @@
+FROM python:3.10-slim
+
+WORKDIR /tests
+COPY tests/ /tests/
+
+RUN pip install robotframework robotframework-requests robotframework-jsonlibrary
+
+
+# Start the Robot Framework test runner
+CMD ["robot", "--outputdir", "results", "."]
